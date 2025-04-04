@@ -6,7 +6,7 @@ import re
 import tkinter as tk
 from tkinter import messagebox
 import configparser
- 
+# Cambio de prueba 
 config = configparser.ConfigParser()
 config.read('config.ini')
  
