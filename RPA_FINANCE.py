@@ -4,6 +4,7 @@ import zipfile
 import os
 import pandas as pd
 from datetime import datetime
+import xlsxwriter
 import shutil
 import xlrd
 import tempfile
@@ -309,6 +310,17 @@ class RPAFinanceApp:
                             # Procesar archivo TXT
                             df = pd.DataFrame(rows, columns=headers)
                             
+                            # Separar la columna 'Account' en columnas
+                            if 'Account' in df.columns:
+                                account_idx = df.columns.get_loc('Account')
+                                account_split = df['Account'].astype(str).str.split('.', n=11, expand=True)
+                                account_col_names = ['Code', 'Cuenta contable', 'Sector', 'Activity', 'Centro de costo', 'Level', 'Localidad', 'C1', 'C2', 'C3', 'C4', 'C5']
+                                account_split.columns = account_col_names
+                                df = df.drop(columns=['Account'])
+                                before = df.iloc[:, :account_idx]
+                                after = df.iloc[:, account_idx:]
+                                df = pd.concat([before, account_split, after], axis=1)
+
                             # Generar nombre del archivo Excel
                             current_time = datetime.now().strftime("%H%M")
                             excel_name = f"{os.path.splitext(file)[0]}_{current_time}.xlsx"
@@ -322,7 +334,7 @@ class RPAFinanceApp:
                             workbook = writer.book
                             worksheet = writer.sheets['Datos']
                             tabla = worksheet.add_table(0, 0, len(df), len(df.columns)-1, 
-                                                     {'style': 'Table Style Medium 2','columns': [{'header': col} for col in headers]})
+                                                     {'style': 'Table Style Medium 2','columns': [{'header': col} for col in df.columns]})
                             writer.close()
                             
                             # Copiar archivo TXT a carpeta RPA FINANCE
