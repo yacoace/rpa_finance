@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Torre de Hanoi</title>
+    <style>
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .torres {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        
+        .torre {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            width: 200px;
+            height: 300px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .base {
+            width: 180px;
+            height: 20px;
+            background-color: #654321;
+            position: absolute;
+            bottom: 0;
+        }
+        
+        .poste {
+            width: 20px;
+            height: 280px;
+            background-color: #654321;
+            position: absolute;
+            bottom: 20px;
+        }
+        
+        .disco {
+            height: 30px;
+            margin: 2px;
+            background-color: #ff6b6b;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .torre.seleccionada .poste {
+            background-color: #4CAF50;
+        }
+        
+        .controles {
+            margin: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        
+        .mensaje {
+            font-size: 20px;
+            margin: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Torre de Hanoi</h1>
+        <div class="controles">
+            <label for="numDiscos">Número de discos:</label>
+            <select id="numDiscos">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+            <button onclick="iniciarJuego()">Nuevo Juego</button>
+        </div>
+        <div class="mensaje" id="mensaje">Selecciona el número de discos y presiona Nuevo Juego</div>
+        <div class="torres">
+            <div class="torre" id="torreA" onclick="seleccionarTorre('A')">
+                <div class="poste"></div>
+                <div class="base"></div>
+            </div>
+            <div class="torre" id="torreB" onclick="seleccionarTorre('B')">
+                <div class="poste"></div>
+                <div class="base"></div>
+            </div>
+            <div class="torre" id="torreC" onclick="seleccionarTorre('C')">
+                <div class="poste"></div>
+                <div class="base"></div>
+            </div>
+        </div>
+        <div id="movimientos">Movimientos: 0</div>
+    </div>
+</body>
+<script src="script.js"></script>
+</html> 
