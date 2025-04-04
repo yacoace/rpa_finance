@@ -8,6 +8,7 @@ import shutil
 import xlrd
 import tempfile
 import openpyxl
+import sys
 
 def num_to_excel_col(n):
         col = ""
@@ -53,7 +54,14 @@ class RPAFinanceApp:
         self.root.title("RPA FINANCE")
 
         # Establecer el icono de la ventana
-        self.root.iconbitmap(r'C:\Users\yaco_acuna\Desktop\M6\Python\RIM_PENDIENTE\RPA_FINANCE.ico')
+        if getattr(sys, 'frozen', False):
+            # Si la aplicación se está ejecutando como un ejecutable
+            icon_path = os.path.join(sys._MEIPASS, 'RPA_FINANCE.ico')
+        else:
+            # Si se está ejecutando desde el script
+            icon_path = 'RPA_FINANCE.ico'
+
+        self.root.iconbitmap(icon_path)
         
         # Cambiar el color de fondo de la ventana principal
         self.root.configure(bg="#fdf3e7")
@@ -64,12 +72,6 @@ class RPAFinanceApp:
         
         # Configuración de la ventana
         self.root.geometry("600x330")
-        
-        # Crear carpeta RPA FINANCE en OneDrive si no existe
-        onedrive_path = os.path.expanduser("~/OneDrive")
-        self.rpa_finance_path = os.path.join(onedrive_path, "RPA FINANCE")
-        if not os.path.exists(self.rpa_finance_path):
-            os.makedirs(self.rpa_finance_path)
         
         # Crear menú
         self.crear_menu()
