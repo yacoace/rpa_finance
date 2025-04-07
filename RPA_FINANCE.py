@@ -239,18 +239,25 @@ class RPAFinanceApp:
     def cambiar_proceso(self, proceso):
         self.proceso_actual = proceso
         self.resetear_archivos()
+        self.resetear_archivos2()
         
         if proceso == "Proceso 1":
+            self.ocultar_proceso2()
             self.mostrar_proceso1()
             self.titulo_proceso.config(text="PROCESO 1")
-            self.descripcion_proceso.config(text="Este proceso consiste en descomprimir un zip y extraer la información archivo descomprimido para almacenarlo en la Ruta de destino a seleccionar. Asimismo, se procesará la información obteniendo un excel con las columnas tratadas para actualizar el origen de datos de un power BI.")
+            messagebox.showinfo("Cambio de Proceso", 
+                "Se ha cambiado al Proceso 1\n\n" +
+                "Este proceso consiste en descomprimir un zip y extraer la información del archivo descomprimido para almacenarlo en la Ruta de destino a seleccionar. " +
+                "Asimismo, se procesará la información obteniendo un excel con las columnas tratadas para actualizar el origen de datos de un power BI.")
         else:
             self.ocultar_proceso1()
-            self.titulo_proceso.config(text="PROCESO 2")
-            self.descripcion_proceso.config(text="Este proceso consiste en la realización de un merge entre dos archivos excel que tienen en común las columnas Numer, Line e Item. Los archivos al ser procesados y tratados son finalmente almacenados en la ruta de destino seleccionada.")
+            self.mostrar_proceso2()
+            self.titulo_proceso2.config(text="PROCESO 2")
+            messagebox.showinfo("Cambio de Proceso", 
+                "Se ha cambiado al Proceso 2\n\n" +
+                "Este proceso consiste en la realización de un merge entre dos archivos excel que tienen en común las columnas Number, Line e Item. " +
+                "Los archivos al ser procesados y tratados son finalmente almacenados en la ruta de destino seleccionada.")
             
-        messagebox.showinfo("Cambio de Proceso", f"Se ha cambiado al {proceso}")
-        
     def select_destination(self):
         folder = filedialog.askdirectory(title="Seleccionar carpeta de destino")
         if folder:
@@ -550,22 +557,6 @@ class RPAFinanceApp:
         self.dest_status_label2.config(text="")
         self.rpa_finance_path2 = ""
         self.process_button2.config(state='disabled')
-
-    def cambiar_proceso(self, proceso):
-        self.proceso_actual = proceso
-        self.resetear_archivos()
-        self.resetear_archivos2()
-        
-        if proceso == "Proceso 1":
-            self.ocultar_proceso2()
-            self.mostrar_proceso1()
-            self.titulo_proceso.config(text="PROCESO 1")
-        else:
-            self.ocultar_proceso1()
-            self.mostrar_proceso2()
-            self.titulo_proceso2.config(text="PROCESO 2")
-            
-        messagebox.showinfo("Cambio de Proceso", f"Se ha cambiado al {proceso}")
 
 if __name__ == "__main__":
     root = tk.Tk()
