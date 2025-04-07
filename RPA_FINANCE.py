@@ -243,7 +243,7 @@ class RPAFinanceApp:
         if proceso == "Proceso 1":
             self.mostrar_proceso1()
             self.titulo_proceso.config(text="PROCESO 1")
-            self.descripcion_proceso.config(text="Este proceso consiste en descomprimir un zip y extraer la información del mismo para almacenarlo en la Ruta de destino a seleccionar. Asimismo, se procesará la información obteniendo un excel con las columnas tratadas para actualizar el origen de datos de un power BI.")
+            self.descripcion_proceso.config(text="Este proceso consiste en descomprimir un zip y extraer la información archivo descomprimido para almacenarlo en la Ruta de destino a seleccionar. Asimismo, se procesará la información obteniendo un excel con las columnas tratadas para actualizar el origen de datos de un power BI.")
         else:
             self.ocultar_proceso1()
             self.titulo_proceso.config(text="PROCESO 2")
